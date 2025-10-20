@@ -9,15 +9,20 @@
         <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
         <!-- Generate ready to run images during publishing to improvement cold starts. -->
         <PublishReadyToRun>true</PublishReadyToRun>
-        <RootNamespace>SMARTAssesment</RootNamespace>
+        <RootNamespace>SMARTAssessment.Api</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Amazon.Lambda.AspNetCoreServer.Hosting" Version="1.9.0"/>
+        <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.7.301"/>
+        <PackageReference Include="Kralizek.Extensions.Configuration.AWSSecretsManager" Version="1.7.0" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Contracts\Requests\" />
+      <Folder Include="Requests\" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\SMARTAssessment.Application\SMARTAssessment.Application.csproj" />
+      <ProjectReference Include="..\SMARTAssessment.Infrastructure\SMARTAssessment.Infrastructure.csproj" />
     </ItemGroup>
 </Project>

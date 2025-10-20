@@ -8,7 +8,10 @@
   "profile": "",
   "region": "",
   "configuration": "Release",
-  "s3-prefix": "SMARTAssesment/",
-  "template": "serverless.template",
-  "template-parameters": ""
+  "function-runtime": "dotnet8",
+  "function-memory-size": 256,
+  "function-timeout": 20,
+  "function-handler": "SMARTAssessment.Api",
+  "function-url-enable": true,
+  "s3-bucket": "dduqtestbucket"
 }

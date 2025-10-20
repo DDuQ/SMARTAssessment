@@ -1,30 +1,32 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
 using Microsoft.Extensions.Configuration;
-using SMARTAssesment.Application.Interfaces;
-using SMARTAssesment.Infrastructure.Clients.Google.Dtos;
+using SMARTAssessment.Application.Interfaces;
+using SMARTAssessment.Infrastructure.Clients.Google.Dtos;
 
-namespace SMARTAssesment.Infrastructure.Clients.Google;
+namespace SMARTAssessment.Infrastructure.Clients.Google;
 
-public class GeocodingClient(HttpClient httpClient, IConfiguration configuration) : IGeocodeClient
+public class GeocodingClient : IGeocodeClient
 {
-    private readonly string _apiKey = configuration["GeocodingApiKey"]!;
+    private readonly string _apiKey;
+    private readonly HttpClient _httpClient;
+
+    public GeocodingClient(HttpClient httpClient, IConfiguration configuration)
+    {
+        _httpClient = httpClient;
+        _apiKey = configuration["GoogleMaps:ApiKey"]!;
+    }
+
     private const string Json = "json";
     
-    public async Task<GeocodeDto> GetLocationByAddress(string address)
+    public async Task<GeocodeDto> GetGeocodeByAddress(string address)
     {
         var query = $"{Json}?address={address}&key={_apiKey}";
         return await ExecuteQuery(query);
     }
-
-    public async Task<GeocodeDto> GetLocationByCoordinates(CoordinatesDto coordinatesDto)
-    {
-        var query = $"{Json}?latlng={coordinatesDto.Latitude},{coordinatesDto.Longitude}&key={_apiKey}";
-        return await ExecuteQuery(query);
-    }
     private async Task<GeocodeDto> ExecuteQuery(string query)
     {
-        var geocodingResponse = await httpClient.GetAsync(query);
+        var geocodingResponse = await _httpClient.GetAsync(query);
         var json = await geocodingResponse.Content.ReadAsStringAsync();
         var addressResult = await geocodingResponse.Content.ReadFromJsonAsync<GeocodeDto>();
         

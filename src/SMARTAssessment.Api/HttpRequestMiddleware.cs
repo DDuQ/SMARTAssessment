@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Net;
 
-namespace SMARTAssessment.Infrastructure;
+namespace SMARTAssessment.Api;
 
 public class HttpRequestMiddleware : IMiddleware
 {
@@ -13,7 +13,12 @@ public class HttpRequestMiddleware : IMiddleware
         catch (HttpRequestException e)
         {
             context.Response.StatusCode = (int)e.StatusCode!;
-            await context.Response.WriteAsync(new{ error = e.Message });
+            await context.Response.WriteAsJsonAsync(new{ error = e.Message });
+        }
+        catch (Exception e)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            await context.Response.WriteAsJsonAsync(new{ error = e.Message });
         }
     }
 }

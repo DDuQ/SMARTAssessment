@@ -1,6 +1,8 @@
-﻿namespace SMARTAssessment.Application.Interfaces;
+﻿using SMARTAssessment.Domain.Entities;
 
-public interface IGeocodingService
+namespace SMARTAssessment.Application.Interfaces;
+
+public interface IGeocodeService
 {
-    
+    Task<Geocode> GetLocationByAddress(string address);
 }

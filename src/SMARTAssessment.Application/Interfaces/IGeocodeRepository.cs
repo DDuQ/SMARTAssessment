@@ -1,6 +1,9 @@
-﻿namespace SMARTAssessment.Application.Interfaces;
+﻿using SMARTAssessment.Domain.Entities;
 
-public class IGeocodeRepository
+namespace SMARTAssessment.Application.Interfaces;
+
+public interface IGeocodeRepository
 {
-    
+    Task<Geocode?> GetGeocodeByAddress(string address);
+    Task<bool> CreateGeocode(Geocode geocode);
 }

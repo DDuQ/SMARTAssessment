@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace SMARTAssessment.Infrastructure.Clients.Google.Dtos;
 

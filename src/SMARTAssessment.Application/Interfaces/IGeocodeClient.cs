@@ -1,11 +1,8 @@
-﻿namespace SMARTAssesment.Application.Interfaces;
+﻿using SMARTAssessment.Infrastructure.Clients.Google.Dtos;
 
-public class IGeocodeClient
-{
-    
-}
+namespace SMARTAssessment.Application.Interfaces;
 
-public class ICacheService
+public interface IGeocodeClient
 {
-    
+    Task<GeocodeDto> GetGeocodeByAddress(string address);
 }
