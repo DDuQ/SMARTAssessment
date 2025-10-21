@@ -37,7 +37,7 @@ public class GeocodeRepository : IGeocodeRepository
 
         var response = await _dynamoDb.GetItemAsync(request);
 
-        if (response.Item is null)
+         if (response.Item.Count == 0)
         {
             return null;
         }
